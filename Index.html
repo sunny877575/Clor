@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            transition: background-color 0.5s ease;
+        }
+
+        .color-display {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #333;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white; /* Text color for the color display */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Text shadow for better readability */
+            transition: background-color 0.5s ease;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Color Guessing Game</h1>
+    <p>Click the button to see a new color. Can you guess what it will be?</p>
+    <div class="color-display" id="colorDisplay">
+        Click Button
+    </div>
+    <button id="generateColorBtn">Generate New Color</button>
+
+    <script>
+        const colorDisplay = document.getElementById('colorDisplay');
+        const generateColorBtn = document.getElementById('generateColorBtn');
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        generateColorBtn.addEventListener('click', () => {
+            const newColor = getRandomColor();
+            colorDisplay.style.backgroundColor = newColor;
+            colorDisplay.textContent = newColor; // Display the hex code
+            document.body.style.backgroundColor = newColor + '20'; // A lighter version for background
+        });
+
+        // Set initial background color
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.backgroundColor = '#f0f0f0';
+        });
+    </script>
+</body>
+</html>
